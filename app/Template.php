@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Template extends Model
 {
-    protected $casts = ['checklist' => 'array', 'items' => 'array'];
 
     public function getCreatedAtAttribute()
     {

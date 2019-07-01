@@ -517,7 +517,7 @@ class CheklistController extends BaseController
     	return json::response($hst,$request);
     }
 
-    public function historyById(Request $request, $id)
+    public function historiesById(Request $request, $id)
     {
     	$hst = History::findOrFail($id);
 

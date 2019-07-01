@@ -15,6 +15,8 @@ $router->post('/register','AuthController@register');
 $router->post('/login','AuthController@login');
 
 $router->group(['prefix' => 'checklist','middleware' => 'auth'], function () use ($router) {
+        $router->get('/histories','CheklistController@indexHistory');
+        $router->get('/histories/{id}','CheklistController@historiesById');
         $router->get('/','CheklistController@index');
         $router->get('/template','CheklistController@indexTemplate');
         $router->get('/template/{id}','CheklistController@indexTemplatebyId');
@@ -22,8 +24,6 @@ $router->group(['prefix' => 'checklist','middleware' => 'auth'], function () use
         $router->get('/{id}/items','CheklistController@checklistItemById');
         $router->get('/{id}/items/{itemId}','CheklistController@ItemById');
         $router->get('/items/summary','CheklistController@summaryItem');
-        $router->get('/histories','CheklistController@indexHistory');
-        $router->get('/histories/{id}','CheklistController@historyById');
         $router->post('/','CheklistController@store');
         $router->post('/{id}/items','CheklistController@storeItem');
         $router->post('/{id}/items/_bulk','CheklistController@bulkUpdateItem');
