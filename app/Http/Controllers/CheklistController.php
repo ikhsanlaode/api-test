@@ -386,8 +386,8 @@ class CheklistController extends BaseController
     	foreach ($request->data as $key => $value) {
 	    	$temp = new Template;
 	    	$temp->name = $value['name'];
-	    	$temp->checklist = json_encode($value['checklist'],TRUE);
-	    	$temp->items = json_encode($value['items'], TRUE);
+	    	$temp->checklist = json_encode($value['checklist']);
+	    	$temp->items = json_encode($value['items']);
 	    	$temp->save();
 
 	    	$data['loggable_type'] = 'template';
@@ -504,8 +504,25 @@ class CheklistController extends BaseController
     	$hst->loggable_id = $data['loggable_id'];
     	$hst->action = $data['action'];
     	$hst->kwuid = $data['kwuid'];
-    	$hst->value = is_array($data['value'])?json_encode($data['value']):$data['value'];
+    	$hst->value = is_array($data['value'])?json_encode($data['value'], JSON_UNESCAPED_SLASHES):$data['value'];
     	$hst->save();
     }
+
+    public function indexHistory(Request $request)
+    {
+    	$hst = History::query();
+
+    	$hst = $hst->paginate($request->input('offset', 10))->appends($request->all());
+
+    	return json::response($hst,$request);
+    }
+
+    public function historyById(Request $request, $id)
+    {
+    	$hst = History::findOrFail($id);
+
+    	return json::response($hst,$request);
+    }
+
 
 }

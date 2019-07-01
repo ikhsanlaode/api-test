@@ -22,6 +22,8 @@ $router->group(['prefix' => 'checklist','middleware' => 'auth'], function () use
         $router->get('/{id}/items','CheklistController@checklistItemById');
         $router->get('/{id}/items/{itemId}','CheklistController@ItemById');
         $router->get('/items/summary','CheklistController@summaryItem');
+        $router->get('/histories','CheklistController@indexHistory');
+        $router->get('/histories/{id}','CheklistController@historyById');
         $router->post('/','CheklistController@store');
         $router->post('/{id}/items','CheklistController@storeItem');
         $router->post('/{id}/items/_bulk','CheklistController@bulkUpdateItem');

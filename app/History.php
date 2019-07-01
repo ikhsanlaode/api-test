@@ -7,12 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class History extends Model
 {
-    //protected $casts = ['checklist' => 'array', 'items' => 'array'];
+    protected $casts = ['value' => 'array'];
 
     public function getCreatedAtAttribute()
     {
         return  Carbon::parse($this->attributes['created_at'])->toIso8601String();
     }
+
 
     public function getUpdatedAtAttribute()
     {
